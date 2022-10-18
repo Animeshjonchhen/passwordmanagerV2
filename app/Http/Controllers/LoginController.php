@@ -29,7 +29,7 @@ class LoginController extends Controller
             ]);
         }
 
-        return redirect('/');
+        return redirect('/users');
     }
 
     public function edit()
@@ -39,6 +39,8 @@ class LoginController extends Controller
 
     public function destroy()
     {
-        auth()->logout();       
+        auth()->logout();
+
+        return redirect('/login');
     }
 }
