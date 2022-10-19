@@ -11,5 +11,16 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'user_id',
     ];
+
+    public function password()
+    {
+        return $this->hasMany(Password::class,'passwords_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

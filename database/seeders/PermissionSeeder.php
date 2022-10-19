@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -35,7 +36,30 @@ class PermissionSeeder extends Seeder
         $role1->givePermissionTo('update category');
         
         $role2 = Role::create(['name' => 'user']);
+        $role2->givePermissionTo('update password');
 
         $role3 = Role::create(['name' => 'Super-Admin']);
+
+        // create demo users
+        $user = \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password'),
+        ]);
+        $user->assignRole($role1);
+
+        $user = \App\Models\User::factory()->create([
+            'name' => 'User',
+            'email' => 'user@example.com',
+            'password' => Hash::make('password'),
+        ]);
+        $user->assignRole($role2);
+
+        $user = \App\Models\User::factory()->create([
+            'name' => 'Super-Admin',
+            'email' => 'superadmin@example.com',
+            'password' => Hash::make('password'),
+        ]);
+        $user->assignRole($role3);
     }
 }

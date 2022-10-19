@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryuserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +37,17 @@ Route::delete('/users/delete/{user}',[UserController::class,'destroy']);
 Route::get('/categories',[CategoryController::class,'index']);
 Route::get('/categories/create',[CategoryController::class,'create']);
 Route::post('/categories/create',[CategoryController::class,'store']);
+Route::get('/categories/show/{category}',[CategoryController::class,'show']);
 Route::get('/categories/update/{category}',[CategoryController::class,'edit']);
 Route::patch('/categories/update/{category}',[CategoryController::class,'update']);
 Route::delete('/categories/delete/{category}',[CategoryController::class,'destroy']);
+
+
+//password
+Route::get('/passwords',[PasswordController::class,'index']);
+Route::get('/passwords/create',[PasswordController::class,'create']);
+Route::post('/passwords/create',[PasswordController::class,'store']);
+Route::get('/passwords/show/{password}',[PasswordController::class,'show']);
+Route::get('/passwords/update/{password}',[PasswordController::class,'edit']);
+Route::patch('/passwords/update/{password}',[PasswordController::class,'update']);
+Route::get('/passwords/delete/{password}',[PasswordController::class,'delete']);

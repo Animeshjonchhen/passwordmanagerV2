@@ -15,7 +15,7 @@
                 <ul class="d-flex justify-content-start" style="list-style-type:none">
                     @auth
                         <li class="nav-item">
-                            <a href="/password" class="p-3">Password</a>
+                            <a href="/passwords" class="p-3">Password</a>
                         </li>
 
                         <li class="nav-item">
@@ -39,7 +39,7 @@
 
 
                         <li class="nav-item">
-                            <a href="/password/create" class="p-3"> Create Password</a>
+                            <a href="/passwords/create" class="p-3"> Create Password</a>
                         </li>
 
                         <li class="nav-item">

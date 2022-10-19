@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Password;
 
 class CategoryController extends Controller
 {
@@ -14,9 +15,12 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show()
+    public function show(Category $category,Password $password)
     {
-
+        return view('Category.show',[
+            "passwords" => Password::where('category_id',$category->id)->get(),
+            "category" => $category,
+        ]);
     }
 
     public function create()
@@ -27,7 +31,7 @@ class CategoryController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'name' => 'required',
+            'name' => 'required|unique:categories,name',
         ]);
 
         $attributes['user_id'] = auth()->user()->id;
@@ -47,7 +51,7 @@ class CategoryController extends Controller
     public function update(Category $category)
     {
         $attributes = request()->validate([
-            'name' => 'required|unique'
+            'name' => 'required|unique:categories,name'
         ]);
 
         $attributes['user_id'] = auth()->user()->id;

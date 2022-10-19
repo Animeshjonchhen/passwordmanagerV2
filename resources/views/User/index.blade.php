@@ -11,7 +11,9 @@
                     <th scope="col">User Id</th>
                     <th scope="col">User Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Action</th>
+                    @can('update user')
+                        <th scope="col">Action</th>
+                    @endcan
                 </tr>
             </thead>
 
@@ -21,16 +23,19 @@
                         <th scope="row"> {{ $user->id }} </th>
                         <td> {{ $user->name }} </td>
                         <td> {{ $user->email }} </td>
-                        <td class="d-flex">
+                        @can('update user')
+                            <td class="d-flex">
+                                <a href="/users/update/{{ $user->id }}" class="flex btn btn-primary"> Edit</a>
 
-                            <a href="/users/update/{{ $user->id }}" class="flex btn btn-primary"> Edit</a>
-
-                            <form action="/users/delete/{{ $user->id }}" method="post" class="flex">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-danger mx-3">Delete</button>
-                            </form>
-                        </td>
+                                @can('delete user')
+                                    <form action="/users/delete/{{ $user->id }}" method="post" class="flex">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger mx-3">Delete</button>
+                                    </form>
+                                @endcan
+                            </td>
+                        @endcan
                     </tr>
                 @endforeach
             </tbody>
